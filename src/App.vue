@@ -1,17 +1,24 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="nav">
+      <Nav></Nav>
+    </div>
+    <!--  :key="$route.fullPath" -->
+    <router-view :key="$route.fullPath"></router-view>
+    <div>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Nav from './components/Nav.vue'
+import Footer from './components/Footer.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Nav,
+    Footer
   }
 }
 </script>
