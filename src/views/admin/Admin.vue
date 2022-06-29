@@ -33,6 +33,7 @@ export default {
 <style>
 .admin-btn{
     position: fixed;
+    z-index:100;
     right:10vw;
     top:30vh
 }

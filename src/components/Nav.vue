@@ -34,6 +34,13 @@
             </Dropdown>
             <router-link v-if="!userBtn" :to="{path:'/login'}">登录</router-link>
         </MenuItem>
+         <MenuItem name="3">
+            <div class="main">
+                
+                <router-link v-if="username==='admin'" :to="{path:'/admin'}">访问Admin界面</router-link>
+
+            </div>
+        </MenuItem>
     </Menu>
   </div>
 </template>
