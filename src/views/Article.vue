@@ -12,10 +12,13 @@
           全部文章
         </BreadcrumbItem>
         <BreadcrumbItem
-          :to="{ path: '/articleType', query: { type: article.type } }"
+          :to="{
+            path: '/articleType',
+            query: { type: article.type, typename: article.typename },
+          }"
         >
           <Icon type="ios-cafe"></Icon>
-          {{ article.type }}
+          {{ article.typename }}
         </BreadcrumbItem>
         <BreadcrumbItem :to="{ path: '/userInfo/' + article.writer }">
           <Icon type="ios-body"></Icon>
@@ -27,7 +30,7 @@
     <!-- 文章详情 -->
     <div class="detail">
       <h2>{{ article.title }}</h2>
-      <p class="article-p">创作时间:{{ Date(article.time) }}</p>
+      <p class="article-p">创作时间:{{ Date(article.time) |date }}</p>
       <p class="article-p">阅读:{{ article.view }}</p>
       <div class="article-text">
         <div v-html="article.text"></div>
@@ -42,19 +45,50 @@
       </Tag>
     </div>
     <!-- 显示详情 -->
-    <div class="type">
+    <!-- <div class="type">
       <List item-layout="vertical">
         <ListItem v-for="talk in articleTalk" :key="talk.talk">
-          <ListItemMeta :title="talk.username" :description="Date(talk.date)">{{
+          <ListItemMeta :title="talk.username" :description="Date(talk.date) || date">{{
             talk.talk
           }}</ListItemMeta>
         </ListItem>
       </List>
+    </div> -->
+    <!--收藏和点赞-->
+    <div class="float">
+
+        <Button v-on:click="aLike(article.a_id, 1)" type="info" ghost>
+        <Icon type="ios-thumbs-up" />
+        
+      </Button>
+      <Button v-on:click="aLike(article.a_id, 0)" type="warning" ghost>
+        <Icon type="ios-thumbs-down" />
+        
+      </Button>
+       <!--收藏-->
+      <Button v-on:click="collection(article.a_id)" type="error" ghost>
+        <Icon type="ios-heart" />
+      </Button>
+    
+    
     </div>
+    <!--评论详情-->
+    <div class="type">
+      <Divider />
+      <List item-layout="vertical">
+        <ListItem v-for="talk in articleTalk" :key="talk.talk">
+          <ListItemMeta :title="talk.username" :description="Date(talk.date) |date" />
+          {{ talk.talk }}
+        </ListItem>
+      </List>
+    </div>
+    <!--评论-->
+    <Talk :a_id="article.a_id"></Talk>
   </div>
 </template>
 
 <script>
+import Talk from "@/components/Talk.vue";
 export default {
   name: "Article",
   data() {
@@ -63,6 +97,9 @@ export default {
       articleTalk: [],
     };
   },
+  components: {
+    Talk,
+  },
   created() {
     if ("id" in this.$route.params) {
       let id = this.$route.params.id;
@@ -70,12 +107,11 @@ export default {
       this.$api.get("getArticle/" + id).then((res) => {
         if (res.code === 0) {
           this.article = res.data;
-          this.$api.get("getArticleTalk/" + id).then((res) => {
-            this.articleTalk = res.data;
-          });
+          console.log(this.article, "this.article");
         } else {
           this.info(res.message);
         }
+        this.getArticleTalk(id);
       });
 
       //判断用户是否看过文章,看过就view+1,如果是第一次看,则调用浏览量+1的API
@@ -99,6 +135,29 @@ export default {
         desc: text,
       });
     },
+    getArticleTalk(id) {
+      this.$api.get("getArticleTalk/" + id).then((res) => {
+        this.articleTalk = res.data;
+      });
+    },
+    collection(id) {
+      this.$api.get("users/user/save/" + id).then((res) => {
+        this.info(res.message);
+      });
+    },
+    aLike(id, like) {
+      if (localStorage.getItem("article_" + id + "_like")) {
+        this.info("您已经进行过了选择");
+      } else {
+        this.$api.get("users/user/like/" + id + "/" + like).then((res) => {
+          this.info(res.message);
+          localStorage.setItem("article_" + id + "_like", 1);
+        });
+      }
+    },
+  },
+  mounted() {
+    console.log(this.article, "article");
   },
 };
 </script>
@@ -107,9 +166,7 @@ export default {
 .type {
   text-align: left;
 }
-.detail {
-  padding: 40 10vw 40px 10vw;
-}
+
 .article {
   padding: 40px 10vw 40px 10vw;
 }
@@ -117,13 +174,22 @@ export default {
 .article-p {
   color: #ababab;
 }
+
 .article h2 {
   padding: 20px;
 }
+
 .article-text {
-  /* display: block; */
   text-align: left;
-  background-color: bisque;
-  padding: 12px;
+  padding: 20px 10vw 20px 10vw;
+}
+.float{
+  
+  display: flex;
+  justify-content: flex-start;
+
+}
+.float Button{
+  margin:10px
 }
 </style>

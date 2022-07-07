@@ -1,6 +1,5 @@
 <template>
     <div>
-       
         <!--轮播图-->
         <Carousel v-model="value2" loop>
             <CarouselItem :key="item.title" v-for="item in pic">
@@ -26,7 +25,6 @@
                 </i-col>
             </row>
         </div>
-        
     </div>
 </template>
 

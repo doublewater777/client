@@ -22,7 +22,9 @@ export default {
   created() {
     if ("type" in this.$route.query) {
       let data = { type: this.$route.query.type };
-      this.getData(data, "分类:" + this.$route.query.type);
+      console.log(this.$route.query,'query');
+      
+      this.getData(data, "分类:" + this.$route.query.typename);
     }
     if ("tag" in this.$route.query) {
       let data = { tag: this.$route.query.tag };
@@ -33,6 +35,8 @@ export default {
     getData(data, title) {
       this.$api.post("getArticles", data).then((res) => {
         this.list = res.data.filter((item) => item.id != 0);
+        console.log(this.list,'this.list');
+        
       });
       this.listTitle = title;
     },

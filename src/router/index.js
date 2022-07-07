@@ -9,6 +9,7 @@ import Register from '../views/Register.vue'
 import UserInfo from '../views/UserInfo.vue'
 import Mails from '../views/Mails.vue'
 import Mail from '../views/Mail.vue'
+import Collection from '../views/Collection.vue'
 import Admin from '../views/admin/Admin.vue'
 import WriteArticle from '../views/admin/WriterArticle.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
@@ -64,6 +65,11 @@ const routes = [
         path: '/mailGetter/:id',
         name: 'Mail',
         component: Mail
+    },
+    {
+        path: '/collection',
+        name: 'Collection',
+        component: Collection
     },
     {
         path: '/admin',

@@ -1,5 +1,5 @@
 const axios = require('axios')
-const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'http://42.192.249.204:3000/'
 const api = {}
 
 const apiAxios = async (method, url, params) => {
