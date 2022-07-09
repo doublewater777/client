@@ -42,5 +42,5 @@ export default {
 </script>
 
 <style>
-
+@import '../assets/mail.css'
 </style>

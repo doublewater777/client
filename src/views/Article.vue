@@ -65,25 +65,31 @@
         <Icon type="ios-thumbs-down" />
         
       </Button>
+       <Button v-on:click="commentLead" type="info" ghost>
+        <Icon custom="iconfont icon-pinglun" />
+        
+      </Button>
        <!--收藏-->
       <Button v-on:click="collection(article.a_id)" type="error" ghost>
         <Icon type="ios-heart" />
       </Button>
-    
-    
+
     </div>
     <!--评论详情-->
-    <div class="type">
+    <div class="type" id="comment">
       <Divider />
       <List item-layout="vertical">
         <ListItem v-for="talk in articleTalk" :key="talk.talk">
-          <ListItemMeta :title="talk.username" :description="Date(talk.date) |date" />
+          <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" :title="talk.username" :description="Date(talk.date) |date" />
           {{ talk.talk }}
         </ListItem>
       </List>
     </div>
     <!--评论-->
     <Talk :a_id="article.a_id"></Talk>
+    <Button v-on:click="returntop" type="info" id="returntop" ghost>
+      <Icon type="md-arrow-round-up" />
+    </Button>
   </div>
 </template>
 
@@ -155,6 +161,17 @@ export default {
         });
       }
     },
+    returntop(){
+      scrollTo({
+        top:0,
+        behavior:"smooth"
+      })
+
+    },
+    commentLead(){
+      let bottombox = document.getElementById("comment");
+      bottombox.scrollIntoView(false)
+    }
   },
   mounted() {
     console.log(this.article, "article");
@@ -163,6 +180,7 @@ export default {
 </script>
 
 <style>
+@import '../assets/icon_custom/iconfont.css';
 .type {
   text-align: left;
 }
@@ -184,12 +202,21 @@ export default {
   padding: 20px 10vw 20px 10vw;
 }
 .float{
-  
+  position: fixed;
+  z-index: 9999;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
+  left: 100px;
+  top: 250px;
 
 }
 .float Button{
   margin:10px
+}
+#returntop{
+  position:fixed;
+  right:50px;
+  bottom:50px;
 }
 </style>

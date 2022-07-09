@@ -32,4 +32,17 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+/* html{
+
+width:100%;
+
+overflow-x:hidden;
+
+} */
+/* 调试神器 */
+/* * {
+    background: #000 !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important;
+} */
 </style>

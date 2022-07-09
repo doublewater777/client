@@ -29,12 +29,17 @@
             //获取所有收藏的文章
             this.$api.get('users/user/saveList').then((res) => {
                 let tData = []
+                let tDataId=[]
                 res.data.map((item) => {
-                    if (item.a_id != 0) {
+                    if (item.a_id != 0 && !tDataId.includes(item.a_id)) {
+                        tDataId.push(item.a_id)
                         tData.push({id: parseInt(item.a_id), title: item.title})
                     }
                 })
-                this.list = tData
+                
+                this.list = tData;
+                console.log(this.list,'this.list');
+                
             })
         }
     }
