@@ -28,11 +28,6 @@
     </div>
 </template>
 <script>
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-</script>
-
-<script>
     import ArticleList from '../components/ArticleList'
 
     export default {

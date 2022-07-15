@@ -198,21 +198,10 @@ export default {
             })
         },
         send(){
-            // this.$api.post('users/user/mail/'+this.userInfo.username,this.textMail).then(res=>{
-            //     if(res.code===0){
-            //         this.$Notice.success({
-            //             title:'已发送留言',
-            //             desc:res.message
-            //         })
-            //     }
-            // })
-            
             let sendData={
                 'text':this.textMail
             }
             this.$api.post('users/user/mail/'+this.userInfo.username,sendData).then(res=>{
-                // console.log(this.userInfo.username);
-                // console.log(sendData);
                 
                 if(res.code===0){
                     this.textMail=''
