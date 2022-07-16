@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Drawer title="用户管理菜单" placement="left" :closable="false" v-model="value2">
+    <Drawer title="用户管理菜单" placement="right" :closable="false" v-model="value2">
     <p @click="goUrl('article')">文章编写</p>
     <p @click="goUrl('type')">类型管理</p>
     <p @click="goUrl('articles')">文章管理</p>
@@ -34,7 +34,7 @@ export default {
 .admin-btn{
     position: fixed;
     z-index:100;
-    right:10vw;
-    top:30vh
+    left:200px;
+    top:6vh
 }
 </style>

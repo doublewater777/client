@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div class="article-list">
         <row type="flex" justify="space-around" class="code-row-bg">
             <i-col span="24">
@@ -36,6 +36,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.main{
+  background-image: url(../assets/1st.jpg);
+}
 </style>

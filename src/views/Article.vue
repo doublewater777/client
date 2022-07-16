@@ -35,6 +35,26 @@
       <div class="article-text">
         <div v-html="article.text"></div>
       </div>
+          <div class="float">
+
+        <Button v-on:click="aLike(article.a_id, 1)" type="info" ghost>
+        <Icon type="ios-thumbs-up" />
+        
+      </Button>
+      <Button v-on:click="aLike(article.a_id, 0)" type="warning" ghost>
+        <Icon type="ios-thumbs-down" />
+        
+      </Button>
+       <Button v-on:click="commentLead" type="info" ghost>
+        <Icon custom="iconfont icon-pinglun" />
+        
+      </Button>
+       <!--收藏-->
+      <Button v-on:click="collection(article.a_id)" type="error" ghost>
+        <Icon type="ios-heart" />
+      </Button>
+
+    </div>
     </div>
     <!-- 显示小标签 -->
     <div>
@@ -55,26 +75,7 @@
       </List>
     </div> -->
     <!--收藏和点赞-->
-    <div class="float">
 
-        <Button v-on:click="aLike(article.a_id, 1)" type="info" ghost>
-        <Icon type="ios-thumbs-up" />
-        
-      </Button>
-      <Button v-on:click="aLike(article.a_id, 0)" type="warning" ghost>
-        <Icon type="ios-thumbs-down" />
-        
-      </Button>
-       <Button v-on:click="commentLead" type="info" ghost>
-        <Icon custom="iconfont icon-pinglun" />
-        
-      </Button>
-       <!--收藏-->
-      <Button v-on:click="collection(article.a_id)" type="error" ghost>
-        <Icon type="ios-heart" />
-      </Button>
-
-    </div>
     <!--评论详情-->
     <div class="type" id="comment">
       <Divider />
@@ -201,13 +202,16 @@ export default {
   text-align: left;
   padding: 20px 10vw 20px 10vw;
 }
+.detail{
+  position: relative;
+}
 .float{
   position: fixed;
   z-index: 9999;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  left: 100px;
+  left: 200px;
   top: 250px;
 
 }

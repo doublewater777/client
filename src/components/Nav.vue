@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <Menu mode="horizontal" :theme="theme1" active-name="1">
-        <MenuItem name="1">
-            <div class="main">
-                <Icon type="md-book" />
-                <router-link to="/">{{index}}</router-link>
-
-            </div>
-        </MenuItem>
+  <div class="nav">
+    <Menu mode="horizontal" :theme="theme1" active-name="1" class="Menu">
+       
         <MenuItem v-for=" item in menu" :name="item.name" :key="item.name">
             <router-link to="item.src">{{item.name}}</router-link>
         </MenuItem>
-        <MenuItem name="2">
+        <MenuItem name="1">
             <Dropdown v-if="userBtn">
                 <a href="javascript:void(0)">
                     用户:{{username}}
@@ -34,9 +28,8 @@
             </Dropdown>
             <router-link v-if="!userBtn" :to="{path:'/login'}">登录</router-link>
         </MenuItem>
-         <MenuItem name="3" v-if="username==='admin'">
-            <div class="main">
-                
+         <MenuItem name="2" v-if="username==='admin'">
+            <div class="main1">               
                 <router-link :to="{path:'/admin'}">访问Admin界面</router-link>
 
             </div>
@@ -101,10 +94,23 @@ export default {
 </script>
 
 <style scoped>
-    .main{
+.nav{
+    
+    background-color:white;
+}
+.Menu{
+    flex-direction: row-reverse;
+}
+.MenuItem{
+    
+}
+
+.ivu-menu-item{
+    float: ;
+}
+.main1{
         font-weight: 600;
-    }
-    a{
-        color:#2f2f2f
-    }
+         
+}
+   
 </style>

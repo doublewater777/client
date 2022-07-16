@@ -1,86 +1,76 @@
 <template>
-  
-    <div class="plane">
-    <h2>注册</h2>
-    <br>
-    <Row class="text-item">
-        <i-col span="12">
-            输入用户名:
-        </i-col>
-        <i-col span="12">
-            <input v-model="username"  style="width:auto">
-        </i-col>
-        
-        
-    </Row>
-    <br>
-    <Row class="text-item">
+  <div class="form">
+    <ul class="tab-group">
+      <li class="tab active"><router-link to="/login">登录</router-link></li>
+      <li class="tab"><router-link to="/register">注册</router-link></li>
+    </ul>
 
-         <i-col span="12">
-            输入密码:
-        </i-col>
-         <i-col span="12">
-            <input type="password" v-model="password"  style="width:auto">
-        </i-col>
-        
-    </Row>
-    <br>
-     <Row class="text-item">
-         <i-col span="12">
-            重新输入密码:
-        </i-col>
-         <i-col span="12">
-            <input type="password" v-model="repassword" style="width:auto">
-        </i-col>
-        
-    </Row>
-    <br>
-    <Row class="text-item">
-         <i-col span="12">
-            输入用户昵称:
-        </i-col>
-         <i-col span="12">
-            
-             <input type="text" v-model="nickname"  style="width:auto">
-        </i-col>
-    </Row>
-    <br>
-    <Row class="text-item">
-         <i-col span="12">
-            
-             输入电话:
-        </i-col>
-         <i-col span="12">
-            <input type="text" v-model="phone" style="width:auto">
-        </i-col>
-    </Row>
-    <br>
-    <Row class="text-item">
-         <i-col span="12">
-            输入年龄:
-        </i-col>
-         <i-col span="12">
-            
-             <input type="number" v-model.number="age" icon="ios-clock-outline" style="width:auto">
-        </i-col>
-    </Row>
-    <br>
-     <Row class="text-item">
-         <i-col span="12">
-             选择性别:
-        </i-col>
-         <i-col span="12">
-            <input name="sex" value="male" v-model="sex" type="radio">男
-            <input name="sex" value="female" v-model="sex" type="radio">女
-        </i-col>
-       
-    </Row>
-    <Button @click="register" type="primary">注册</Button>
+    <div class="tab-content">
+      
+      <div id="signup">
+        <h1>注册</h1>
 
+        <div class="top-row">
+          <div class="field-wrap">
+            
+                      <input type="text" required autocomplete="off" v-model.trim="username" placeholder="用户名*"/>
+
+          </div>
+
+          <div class="field-wrap">
+            
+            <input type="text" required autocomplete="off" v-model="nickname" placeholder="昵称"/>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <!-- <label> 电话号码<span class="req">*</span> </label> -->
+          <input type="text" required autocomplete="off" v-model.number="phone" placeholder="电话号码"/>
+        </div>
+
+        <div class="field-wrap">
+          <!-- <label> 密码<span class="req">*</span> </label> -->
+          <input
+            type="password"
+            required
+            autocomplete="off"
+            v-model.trim="password"
+            placeholder="密码*"
+          />
+        </div>
+        <div class="field-wrap">
+          <!-- <label> 重复密码<span class="req">*</span> </label> -->
+          <input
+            type="password"
+            required
+            autocomplete="off"
+            v-model.trim="repassword"
+            placeholder="重复密码*"
+          />
+        </div>
+        <button type="submit" class="button button-block" @click="register">注册</button>
+      </div>
+
+      <div id="login">
+        <h1>欢迎登录!</h1>
+
+        <div class="field-wrap">
+          <label> 用户名<span class="req">*</span> </label>
+          <input type="text" required autocomplete="off" v-model="username"/>
+        </div>
+
+        <div class="field-wrap">
+          <label> Password<span class="req">*</span> </label>
+          <input type="password" required autocomplete="off" v-model="password" />
+        </div>
+
+        <button class="button button-block" @click="login">登录</button>
+      </div>
+    </div>
+    <!-- tab-content -->
   </div>
-  
 </template>
-
+<script src="https://wow.techbrood.com/libs/jquery/jquery-1.11.1.min.js"></script>
 <script>
 export default {
   name: "Register",
@@ -96,6 +86,25 @@ export default {
     };
   },
   methods: {
+    login() {
+      let data = { username: this.username, password: this.password };
+      this.$api.post("users/login", data).then((res) => {
+        this.$Notice.info({
+          title: "提示",
+          desc: res.message,
+        });
+        if (res.code === 0) {
+          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem("username", this.username);
+          this.$router.push({ path: "/" });
+        } else {
+          sessionStorage.removeItem("token");
+        }
+      });
+    },
+    // register(){
+    //   this.$router.push({path:'register'})
+    // }
     register() {
       if (this.username && this.password && this.repassword) {
         if (this.password === this.repassword) {
@@ -137,14 +146,170 @@ export default {
 </script>
 
 <style scoped>
-.plane {
-  padding: 5vw 20vw;
-  margin-bottom: -5vw;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
-.text-item {
-  padding-top: 10px;
+html {
+  overflow-y: scroll;
 }
-Button {
-  margin-top: 10px;
+body {
+  background: #c1bdba;
+  font-family: "Titillium Web", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #1ab188;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+a:hover {
+  color: #179b77;
+}
+.form {
+  background: rgba(19, 35, 47, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+.tab-group li a:hover {
+  background: #179b77;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #1ab188;
+  color: #ffffff;
+}
+.tab-content > div:last-child {
+  display: none;
+}
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+  transform: translateY(6px);
+  left: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+label.active {
+  -webkit-transform: translateY(50px);
+  transform: translateY(50px);
+  left: 2px;
+  font-size: 14px;
+}
+label.active .req {
+  opacity: 0;
+}
+label.highlight {
+  color: #ffffff;
+}
+input,
+textarea {
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+input:focus,
+textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+.top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.top-row > div:last-child {
+  margin: 0;
+}
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: #1ab188;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+}
+.button:hover,
+.button:focus {
+  background: #179b77;
+}
+.button-block {
+  display: block;
+  width: 100%;
+}
+.forgot {
+  margin-top: -20px;
+  text-align: right;
 }
 </style>

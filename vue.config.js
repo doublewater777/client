@@ -10,4 +10,21 @@ module.exports = defineConfig({
       return args;
     })
   },
+  configureWebpack: {
+    resolveLoader: {
+      modules: ['node_modules', './loaders/'],
+    },
+  },
+  chainWebpack: config => {
+    config.module
+      .rule('jfif')
+      .test(/\.jfif$/)
+      .use('file-loader')
+      .loader('file-loader')
+      .end()
+  }
+
+
+
+
 })
