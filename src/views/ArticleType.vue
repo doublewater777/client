@@ -24,11 +24,11 @@ export default {
       let data = { type: this.$route.query.type };
       console.log(this.$route.query,'query');
       
-      this.getData(data, "分类:" + this.$route.query.typename);
+      this.getData(data, "" + this.$route.query.typename);
     }
     if ("tag" in this.$route.query) {
       let data = { tag: this.$route.query.tag };
-      this.getData(data, "标签:" + this.$route.query.tag);
+      this.getData(data, "" + this.$route.query.tag);
     }
   },
   methods: {

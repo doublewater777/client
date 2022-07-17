@@ -10,7 +10,7 @@
     <section class="section section-one">
         <h1>我是谁?</h1>
         <img src="../assets/photo.jpg" >
-        <p>我是潘洋!很高兴认识你.这是我的第一个个人网站,这里面的功能都是自己很喜欢的.你可以通过这个网站了解我.我学习前端不长,目前只能说了解HTML,CSS,JavaScript,Vue,Node.js,Element.Ui等等.
+        <p>我是潘洋!很高兴认识你.这是我的第一个个人网站,这里面的功能都是自己很喜欢的.你可以通过这个网站了解我.我学习前端不长,目前稍微了解HTML,CSS,JavaScript,Vue,Node.js,Element.Ui,Webpack等等.
            
         </p>
         <p> 我喜欢一切美的东西.希望这个网站永远可以带给我对前端学习的激情,网站的背景图片都是杭电的官微里下载的,今后学习到新技术,会加入自己喜欢的部分!</p>
@@ -97,7 +97,7 @@
             这是我写的第一首歌,纯粹简单,单纯的为了快乐而做的,也希望自己之后多快乐地工作
         </p>
        
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1959258478&auto=1&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1959258478&auto=1&height=66" auto=0></iframe>
 
     <div>
 

@@ -55,11 +55,15 @@ overflow-x:hidden;
 aside{
   width: 200px;
   background-color: pink;
- 
+  position: fixed;
+  height: 100vh;
 }
 .main{
   flex: 1;
-  background-color: rgb(249, 205, 173);
+  /* background-color: rgb(249, 205, 173); */
+  margin-left: 200px;
+   background: linear-gradient(0.25turn, #3f87a6,#FFE4B5, #ebf8e1, #f69d3c);
+
 }
 
 </style>
