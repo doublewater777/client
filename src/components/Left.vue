@@ -41,7 +41,7 @@
     <div class="button-group">
       <router-link to="/" class="button">首页</router-link>
       <router-link to="/articles" class="button">文章</router-link>
-      <router-link to="/study" class="button">学习资料</router-link>
+      <router-link to="/resource" class="button">学习资料</router-link>
       <router-link to="/" class="button">休闲娱乐</router-link>
       <!-- <button >文章</button>
     <button >学习资料</button>
@@ -73,8 +73,10 @@ img {
 .locate{
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-family: Microsoft YaHei,Microsoft JhengHei,SimHei;
-    font-size: large;
+    font-size: 1.15em;
+    opacity: 1;
     /* height: 50px; */
+
 }
 .locate img{
     width:20px;
@@ -85,10 +87,12 @@ img {
   font: 1em sans-serif;
   font-size: medium;
   margin: 10px 0;
+  color: #000;
 }
 .school{
     font-family:fantasy;
     margin: 10px 0;
+    color: black;
 }
 .button-group {
   margin-top: 60px;

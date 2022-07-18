@@ -5,9 +5,7 @@
     <div class="main-content">
       <nav class="navbar user-info-navbar" role="navigation">
         <ul class="user-info-menu left-links list-inline list-unstyled">
-          <!-- <li class="hidden-sm hidden-xs">
-            <a href="#" data-toggle="sidebar"><i class="fa-bars"></i></a>
-          </li> -->
+          
           <li class="dropdown hover-line language-switcher">
            
             <ul class="dropdown-menu languages">
@@ -84,7 +82,15 @@ export default {
   },
 };
 </script>
-
-<style>
-
+<style scoped >
+.page-container{
+  /* width:70vw; */
+  margin-left: 5px;
+}
+.main-content{
+  width:80%;
+  margin-left: 10%;
+}
 </style>
+
+
