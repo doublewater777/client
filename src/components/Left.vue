@@ -41,7 +41,7 @@
     <div class="button-group">
       <router-link to="/" class="button">首页</router-link>
       <router-link to="/articles" class="button">文章</router-link>
-      <router-link to="/" class="button">学习资料</router-link>
+      <router-link to="/study" class="button">学习资料</router-link>
       <router-link to="/" class="button">休闲娱乐</router-link>
       <!-- <button >文章</button>
     <button >学习资料</button>

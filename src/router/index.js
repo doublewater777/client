@@ -14,7 +14,8 @@ import Admin from '../views/admin/Admin.vue'
 import WriteArticle from '../views/admin/WriterArticle.vue'
 import AdminArticles from '../views/admin/AdminArticles.vue'
 import AdminUsers from '../views/admin/AdminUsers.vue'
-
+import Resource from '../views/Resource.vue'
+import { loadJs } from '../assets/js/app' 
 
 
 Vue.use(VueRouter)
@@ -89,6 +90,10 @@ const routes = [
             }
         ]
     },
+    {
+        path: '/resource',
+        component: Resource
+    }
 
 
 ]
@@ -98,6 +103,12 @@ const router = new VueRouter({
     mode: 'history'
 
 });
+router.afterEach((to, from, next) => {
+    console.log("to => ", to, "from => ", from, "next => ", next);
+    if (to.path == '/' && to.hash == '') {
+        loadJs();
+    }
+})
 // const VueRouterPush = VueRouter.prototype.push
 // VueRouter.prototype.push = function push(to) {
 //     return VueRouterPush.call(this, to).catch(err => err)
