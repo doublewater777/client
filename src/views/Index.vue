@@ -146,10 +146,11 @@
         
     }
 </script>
+<style scoped src=".././assets/css/fonts.googleapi.css">
 
+</style>
 <style scoped lang="less">
 
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 html,
 body {
     box-sizing: border-box;
