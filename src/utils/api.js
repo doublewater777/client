@@ -21,7 +21,6 @@ const apiAxios = async (method, url, params) => {
             params:
                 method === 'GET' ? params : null
         }).then((res) => {
-            console.log(res.data)
             resolve(res.data)
         }).catch(e => {
             console.log(e)
